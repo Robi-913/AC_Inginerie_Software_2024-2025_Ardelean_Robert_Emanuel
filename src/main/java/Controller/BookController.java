@@ -17,6 +17,7 @@ public class BookController {
 
         this.bookView.addSaveButtonListener(new SaveButtonListener());
         this.bookView.addDeleteButtonListener(new DeleteButtonListener());
+        this.bookView.addSellerButtonListener(new SellerButtonListener());
     }
 
     private class SaveButtonListener implements EventHandler<ActionEvent> {
@@ -54,6 +55,25 @@ public class BookController {
                 }
             }else {
                 bookView.addDisplayAlertMessage("Delete Error!","Problem at deleting the Book!", "Please select a book to delete!");
+            }
+        }
+    }
+
+    private class SellerButtonListener implements EventHandler<ActionEvent> {
+        // deocamndata aceasta este o impelmentare simpla a butonului de sell
+        // mai incolo voi avea aici niste actualizari de baze de date in care voi folosi sellservice
+        // sa imi incarc in alt table ce carte este dorita si informatiile clientului pentru a se face tranzactia cu succes
+        @Override
+        public void handle(ActionEvent actionEvent) {
+            BookDTO bookDTO = bookView.getBookTableView().getSelectionModel().getSelectedItem();
+            if(bookDTO != null){
+                boolean sellBook = bookService.delete(BookMapper.convertBookDTOToBook(bookDTO));
+                if(sellBook){
+                    bookView.addDisplayAlertMessage("Seller Successfu!","Book Sold!","Book was sold successfully from the database!");
+                    bookView.removeBookFromObservableList(bookDTO);
+                }else {
+                    bookView.addDisplayAlertMessage("Seller Error!","Problem at selling the Book!", "There was a problem at selling the book from the database pls try again!");
+                }
             }
         }
     }
