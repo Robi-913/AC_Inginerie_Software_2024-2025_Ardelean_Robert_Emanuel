@@ -88,7 +88,7 @@ public class BookRepositoryMySQLTest {
         bookRepositoryMySql.removeAll();
 
         List<Book> books = bookRepositoryMySql.findAll();
-        assertEquals(0, books.size(), "Baza de date ar trebui să fie goala după stergerea tuturor inregistrarilor.");
+        assertEquals(0, books.size(), "Baza de date ar trebui sa fie goala după stergerea tuturor inregistrarilor.");
     }
 }
 
