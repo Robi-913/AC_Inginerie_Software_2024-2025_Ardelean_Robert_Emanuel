@@ -41,7 +41,7 @@ public class Book {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Book: Id: " + id + " Title: " + title + " Author: " + author + " Published Date: " + publishedDate;
     }
 }
