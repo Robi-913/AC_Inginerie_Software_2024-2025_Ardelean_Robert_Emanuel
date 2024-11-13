@@ -46,7 +46,7 @@ public class BookRepositoryMySQLTest {
 
         Optional<Book> foundBook = bookRepositoryMySql.findById(1L);
         assertTrue(foundBook.isPresent());
-        assertEquals("Ion", foundBook.get().getTitle(), "Titlul cărții ar trebui să fie 'Ion'");
+        assertEquals("Ion", foundBook.get().getTitle(), "Titlul cartii ar trebui să fie 'Ion'");
     }
 
     @Test
@@ -58,10 +58,10 @@ public class BookRepositoryMySQLTest {
                 .build();
 
         boolean isSaved = bookRepositoryMySql.save(book);
-        assertTrue(isSaved, "Cartea ar trebui să fie salvată cu succes.");
+        assertTrue(isSaved, "Cartea ar trebui sa fie salvata cu succes.");
 
         List<Book> books = bookRepositoryMySql.findAll();
-        assertEquals(1, books.size(), "Ar trebui să existe o singură carte în baza de date.");
+        assertEquals(1, books.size(), "Ar trebui sa existe o singura carte în baza de date.");
     }
 
     @Test
@@ -74,10 +74,10 @@ public class BookRepositoryMySQLTest {
         bookRepositoryMySql.save(book);
 
         boolean isDeleted = bookRepositoryMySql.delete(book);
-        assertTrue(isDeleted, "Cartea ar trebui să fie ștearsă.");
+        assertTrue(isDeleted, "Cartea ar trebui să fie stearsa.");
 
         List<Book> books = bookRepositoryMySql.findAll();
-        assertEquals(0, books.size(), "Baza de date ar trebui să fie goală după ștergere.");
+        assertEquals(0, books.size(), "Baza de date ar trebui să fie goala dupa stergere.");
     }
 
     @Test
@@ -88,7 +88,7 @@ public class BookRepositoryMySQLTest {
         bookRepositoryMySql.removeAll();
 
         List<Book> books = bookRepositoryMySql.findAll();
-        assertEquals(0, books.size(), "Baza de date ar trebui să fie goală după ștergerea tuturor înregistrărilor.");
+        assertEquals(0, books.size(), "Baza de date ar trebui să fie goala după stergerea tuturor inregistrarilor.");
     }
 }
 
