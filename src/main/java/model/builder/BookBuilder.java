@@ -4,7 +4,6 @@ import model.Book;
 
 import java.time.LocalDate;
 
-//Design Pattern Creational
 public class BookBuilder {
     private final Book book;
 
@@ -12,7 +11,6 @@ public class BookBuilder {
         book = new Book();
     }
 
-    // returnam instanta curenta de BookBuilder
     public BookBuilder setId(Long id) {
         book.setId(id);
         return this;

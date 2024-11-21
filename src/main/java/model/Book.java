@@ -8,6 +8,7 @@ public class Book {
     private String author;
     private LocalDate publishedDate;
 
+
     public Long getId() {
         return id;
     }

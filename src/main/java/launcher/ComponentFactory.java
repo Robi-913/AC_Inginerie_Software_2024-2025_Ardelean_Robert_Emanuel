@@ -1,13 +1,13 @@
 package launcher;
 
-import Controller.BookController;
+import controller.BookController;
 import database.DatabaseConnectionFactory;
 import javafx.stage.Stage;
 import mapper.BookMapper;
-import repository.BookRepository;
-import repository.BookRepositoryMySql;
-import service.BookService;
-import service.BookServiceImpl;
+import repository.book.BookRepository;
+import repository.book.BookRepositoryMySql;
+import service.book.BookService;
+import service.book.BookServiceImpl;
 import view.BookView;
 import view.model.BookDTO;
 

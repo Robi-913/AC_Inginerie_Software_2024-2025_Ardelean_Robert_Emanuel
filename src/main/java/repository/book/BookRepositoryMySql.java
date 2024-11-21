@@ -1,8 +1,7 @@
-package repository;
+package repository.book;
 
 import model.Book;
 import model.builder.BookBuilder;
-import repository.book.BookRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -86,7 +85,7 @@ public class BookRepositoryMySql implements BookRepository {
 
     @Override
     public void removeAll() {
-        String sql = "TRUNCATE book";
+        String sql = "DELETE FROM book WHERE id >= 0";
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
