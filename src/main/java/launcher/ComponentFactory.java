@@ -6,8 +6,12 @@ import javafx.stage.Stage;
 import mapper.BookMapper;
 import repository.book.BookRepository;
 import repository.book.BookRepositoryMySql;
+import repository.sell.SellRepository;
+import repository.sell.SellRepositoryMySql;
 import service.book.BookService;
 import service.book.BookServiceImpl;
+import service.sell.SellService;
+import service.sell.SellServiceImpl;
 import view.BookView;
 import view.model.BookDTO;
 
@@ -19,6 +23,8 @@ public class ComponentFactory {
     private final BookController bookController;
     private final BookRepository bookRepository;
     private final BookService bookService;
+    private final SellRepository sellRepository;
+    private final SellService sellService;
     private static volatile ComponentFactory instance;
 
     public static ComponentFactory getInstance(Boolean componentsForTest, Stage primaryStage) {
@@ -36,9 +42,11 @@ public class ComponentFactory {
         Connection connection = DatabaseConnectionFactory.getConnectionWrapper(componentsForTest).getConnection();
         this.bookRepository = new BookRepositoryMySql(connection);
         this.bookService = new BookServiceImpl(bookRepository);
+        this.sellRepository = new SellRepositoryMySql(connection);
+        this.sellService = new SellServiceImpl(sellRepository);
         List<BookDTO> books = BookMapper.convertBookListToBookDTOList(bookService.findAll());
         this.bookView = new BookView(primaryStage, books);
-        this.bookController = new BookController(bookView, bookService);
+        this.bookController = new BookController(bookView, bookService, sellService);
     }
 
     public BookView getBookView() {

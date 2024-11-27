@@ -6,6 +6,7 @@ import launcher.LoginComponentFactory;
 import model.User;
 import model.validator.Notification;
 import service.user.AuthenticationService;
+import model.session.UserSession;
 import view.LoginView;
 
 public class LoginController {
@@ -23,7 +24,6 @@ public class LoginController {
     }
 
     private class LoginButtonListener implements EventHandler<ActionEvent> {
-
         @Override
         public void handle(javafx.event.ActionEvent event) {
             String username = loginView.getUsername();
@@ -31,14 +31,20 @@ public class LoginController {
 
             Notification<User> loginNotification = authenticationService.login(username, password);
 
-            if (loginNotification.hasErrors()){
+            if (loginNotification.hasErrors()) {
                 loginView.setActionTargetText(loginNotification.getFormattedErrors());
-            }else{
-                loginView.setActionTargetText("LogIn Successfull!");
+            } else {
+                loginView.setActionTargetText("LogIn Successful!");
+
+                User loggedInUser = loginNotification.getResult();
+                UserSession.getInstance().setUserId(loggedInUser.getId());
+                UserSession.getInstance().setUsername(loggedInUser.getUsername());
+
                 EmployeeComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage());
             }
         }
     }
+
 
     private class RegisterButtonListener implements EventHandler<ActionEvent> {
 

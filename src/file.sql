@@ -43,18 +43,18 @@ INSERT INTO user_role (user_id, role_id)
 SELECT u.id, r.id FROM user u, role r
 WHERE u.username = 'customer1@example.com' AND r.role = 'customer';
 
-INSERT INTO book (author, title, publishedDate)
+INSERT INTO book (author, title, publishedDate, price, stock)
 VALUES
-    ('J.K. Rowling', 'Harry Potter and the Philosopher\'s Stone', '1997-06-26'),
-    ('J.R.R. Tolkien', 'The Lord of the Rings: The Fellowship of the Ring', '1954-07-29'),
-    ('George Orwell', '1984', '1949-06-08'),
-    ('Harper Lee', 'To Kill a Mockingbird', '1960-07-11'),
-    ('F. Scott Fitzgerald', 'The Great Gatsby', '1925-04-10'),
-    ('Gabriel García Márquez', 'One Hundred Years of Solitude', '1967-05-30'),
-    ('Leo Tolstoy', 'War and Peace', '1869-01-01'),
-    ('Jane Austen', 'Pride and Prejudice', '1813-01-28'),
-    ('Mary Shelley', 'Frankenstein', '1818-01-01'),
-    ('Markus Zusak', 'The Book Thief', '2005-03-14');
+    ('J.K. Rowling', 'Harry Potter and the Philosopher\'s Stone', '1997-06-26', 29.99, 10),
+    ('J.R.R. Tolkien', 'The Lord of the Rings: The Fellowship of the Ring', '1954-07-29', 39.99, 8),
+    ('George Orwell', '1984', '1949-06-08', 19.99, 15),
+    ('Harper Lee', 'To Kill a Mockingbird', '1960-07-11', 24.99, 12),
+    ('F. Scott Fitzgerald', 'The Great Gatsby', '1925-04-10', 14.99, 20),
+    ('Gabriel García Márquez', 'One Hundred Years of Solitude', '1967-05-30', 34.99, 7),
+    ('Leo Tolstoy', 'War and Peace', '1869-01-01', 49.99, 5),
+    ('Jane Austen', 'Pride and Prejudice', '1813-01-28', 9.99, 25),
+    ('Mary Shelley', 'Frankenstein', '1818-01-01', 12.99, 18),
+    ('Markus Zusak', 'The Book Thief', '2005-03-14', 22.99, 10);
 
 USE test_library;
 
@@ -101,15 +101,15 @@ INSERT INTO user_role (user_id, role_id)
 SELECT u.id, r.id FROM user u, role r
 WHERE u.username = 'customer1@example.com' AND r.role = 'customer';
 
-INSERT INTO book (author, title, publishedDate)
+INSERT INTO book (author, title, publishedDate, price, stock)
 VALUES
-    ('J.K. Rowling', 'Harry Potter and the Philosopher\'s Stone', '1997-06-26'),
-    ('J.R.R. Tolkien', 'The Lord of the Rings: The Fellowship of the Ring', '1954-07-29'),
-    ('George Orwell', '1984', '1949-06-08'),
-    ('Harper Lee', 'To Kill a Mockingbird', '1960-07-11'),
-    ('F. Scott Fitzgerald', 'The Great Gatsby', '1925-04-10'),
-    ('Gabriel García Márquez', 'One Hundred Years of Solitude', '1967-05-30'),
-    ('Leo Tolstoy', 'War and Peace', '1869-01-01'),
-    ('Jane Austen', 'Pride and Prejudice', '1813-01-28'),
-    ('Mary Shelley', 'Frankenstein', '1818-01-01'),
-    ('Markus Zusak', 'The Book Thief', '2005-03-14');
+    ('J.K. Rowling', 'Harry Potter and the Philosopher\'s Stone', '1997-06-26', 29.99, 10),
+    ('J.R.R. Tolkien', 'The Lord of the Rings: The Fellowship of the Ring', '1954-07-29', 39.99, 8),
+    ('George Orwell', '1984', '1949-06-08', 19.99, 15),
+    ('Harper Lee', 'To Kill a Mockingbird', '1960-07-11', 24.99, 12),
+    ('F. Scott Fitzgerald', 'The Great Gatsby', '1925-04-10', 14.99, 20),
+    ('Gabriel García Márquez', 'One Hundred Years of Solitude', '1967-05-30', 34.99, 7),
+    ('Leo Tolstoy', 'War and Peace', '1869-01-01', 49.99, 5),
+    ('Jane Austen', 'Pride and Prejudice', '1813-01-28', 9.99, 25),
+    ('Mary Shelley', 'Frankenstein', '1818-01-01', 12.99, 18),
+    ('Markus Zusak', 'The Book Thief', '2005-03-14', 22.99, 10);

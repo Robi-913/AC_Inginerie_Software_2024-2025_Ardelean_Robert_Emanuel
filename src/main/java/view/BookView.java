@@ -21,8 +21,14 @@ public class BookView {
     private final ObservableList<BookDTO> booksObservableList;
     private TextField authorTextField;
     private TextField titleTextField;
+    private TextField priceTextField;
+    private TextField stockTextField;
+    private TextField sellStockTextField;
     private Label authorLabel;
     private Label titleLabel;
+    private Label priceLabel;
+    private Label stockLabel;
+    private Label sellStockLabel;
     private Button saveButton;
     private Button deleteButton;
     private Button sellerButton;
@@ -33,7 +39,7 @@ public class BookView {
         GridPane gridPane = new GridPane();
         initializeGridPage(gridPane);
 
-        Scene scene = new Scene(gridPane, 720, 480);
+        Scene scene = new Scene(gridPane, 1100, 600);
         primaryStage.setScene(scene);
 
         booksObservableList = FXCollections.observableArrayList(books);
@@ -56,16 +62,35 @@ public class BookView {
 
         bookTableView.setPlaceholder(new Label("No books to display"));
 
+        bookTableView.setPrefHeight(400);
+        bookTableView.setPrefWidth(1000);
+
         TableColumn<BookDTO, String> titleColumn = new TableColumn<>("Title");
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        titleColumn.setPrefWidth(200);
+        titleColumn.setStyle("-fx-alignment: CENTER;");
         TableColumn<BookDTO, String> authorColumn = new TableColumn<>("Author");
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
+        authorColumn.setPrefWidth(200);
+        authorColumn.setStyle("-fx-alignment: CENTER;");
+        TableColumn<BookDTO, String> priceColumn = new TableColumn<>("Price");
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        priceColumn.setPrefWidth(200);
+        priceColumn.setStyle("-fx-alignment: CENTER;");
+        TableColumn<BookDTO, String> stockColumn = new TableColumn<>("Stock");
+        stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        stockColumn.setPrefWidth(200);
+        stockColumn.setStyle("-fx-alignment: CENTER;");
+        TableColumn<BookDTO, String> publishedDateColumn = new TableColumn<>("PublishedDate");
+        publishedDateColumn.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
+        publishedDateColumn.setPrefWidth(200);
+        publishedDateColumn.setStyle("-fx-alignment: CENTER;");
 
-        bookTableView.getColumns().addAll(titleColumn, authorColumn);
+        bookTableView.getColumns().addAll(titleColumn, authorColumn, priceColumn, stockColumn, publishedDateColumn);
 
         bookTableView.setItems(booksObservableList);
 
-        gridPane.add(bookTableView, 0, 0, 5, 1);
+        gridPane.add(bookTableView, 0, 0, 6, 1);
     }
 
     private void initSaveOptions(GridPane gridPane) {
@@ -81,14 +106,32 @@ public class BookView {
         authorTextField = new TextField();
         gridPane.add(authorTextField, 4, 1);
 
+        priceLabel = new Label("Price");
+        gridPane.add(priceLabel, 1, 2);
+
+        priceTextField = new TextField();
+        gridPane.add(priceTextField, 2, 2);
+
+        stockLabel = new Label("Stock");
+        gridPane.add(stockLabel, 3, 2);
+
+        stockTextField = new TextField();
+        gridPane.add(stockTextField, 4, 2);
+
+        sellStockLabel = new Label("Sell Stock");
+        gridPane.add(sellStockLabel, 1, 4);
+
+        sellStockTextField = new TextField();
+        gridPane.add(sellStockTextField, 2, 4);
+
         saveButton = new Button("Save");
-        gridPane.add(saveButton, 5, 1);
+        gridPane.add(saveButton, 1, 3);
 
         deleteButton = new Button("Delete");
-        gridPane.add(deleteButton, 6, 1);
+        gridPane.add(deleteButton, 2, 3);
 
         sellerButton = new Button("Sell Book");
-        gridPane.add(sellerButton, 7, 1);
+        gridPane.add(sellerButton, 1, 5);
 
 
     }
@@ -122,12 +165,31 @@ public class BookView {
         return authorTextField.getText();
     }
 
+    public String getStock() {
+        return stockTextField.getText();
+    }
+
+    public String getPrice() {
+        return priceTextField.getText();
+    }
+
+    public String getSellStock() {
+        return sellStockTextField.getText();
+    }
+
     public void addBookToObservableList(BookDTO bookDTO) {
         this.booksObservableList.add(bookDTO);
     }
 
     public void removeBookFromObservableList(BookDTO bookDTO) {
         this.booksObservableList.remove(bookDTO);
+    }
+
+    public void updateBookInObservableList(BookDTO bookDTO) {
+        int index = booksObservableList.indexOf(bookDTO);
+        if (index >= 0) {
+            booksObservableList.set(index, bookDTO);
+        }
     }
 
     public TableView<BookDTO> getBookTableView() {

@@ -75,5 +75,4 @@ public class LoginComponentFactory {
     public LoginController getLoginController(){
         return loginController;
     }
-
 }

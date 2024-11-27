@@ -6,14 +6,16 @@ public class SQLTableCreationFactory {
 
     public String getCreateSQLForTable(String table) {
         return switch (table) {
-            case BOOK -> "CREATE TABLE IF NOT EXISTS book (" +
-                    " id int(11) NOT NULL AUTO_INCREMENT," +
-                    " author varchar(500) NOT NULL," +
-                    " title varchar(500) NOT NULL," +
-                    " publishedDate datetime DEFAULT NULL," +
+            case BOOK -> "CREATE TABLE IF NOT EXISTS `book` (" +
+                    " id INT NOT NULL AUTO_INCREMENT," +
+                    " author VARCHAR(500) NOT NULL," +
+                    " title VARCHAR(500) NOT NULL," +
+                    " publishedDate DATETIME DEFAULT NULL," +
+                    " price DECIMAL(10, 2) NOT NULL," +
+                    " stock INT NOT NULL," +
                     " PRIMARY KEY (id)," +
                     " UNIQUE KEY id_UNIQUE (id)" +
-                    ") ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;";
+                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
             case USER -> "CREATE TABLE IF NOT EXISTS user (" +
                     " id INT NOT NULL AUTO_INCREMENT," +
@@ -75,10 +77,17 @@ public class SQLTableCreationFactory {
                     "   ON DELETE CASCADE" +
                     "   ON UPDATE CASCADE);";
 
-            default -> "";
+            case ORDER -> "CREATE TABLE `order` (" +
+                    "`order_id` INT NOT NULL AUTO_INCREMENT," +
+                    "`user_id` INT NOT NULL," +
+                    "`time` DATETIME NOT NULL," +
+                    "`total_price` DECIMAL(10,2) NOT NULL," +
+                    "PRIMARY KEY (`order_id`)," +
+                    "CONSTRAINT `user_order_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)" +
+                    "ON DELETE CASCADE ON UPDATE CASCADE" +
+                    ");";
 
+            default -> "";
         };
     }
-
-
 }
