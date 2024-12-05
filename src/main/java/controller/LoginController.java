@@ -52,12 +52,9 @@ public class LoginController {
                         new ButtonType("Employee")
                 );
 
-                // Verificăm alegerea utilizatorului
                 if (result.isPresent() && result.get().getText().equals("Admin")) {
-                    // Creează instanța pentru AdminComponentFactory
                     AdminComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage());
                 } else {
-                    // Creează instanța pentru EmployeeComponentFactory
                     EmployeeComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage());
                 }
             }

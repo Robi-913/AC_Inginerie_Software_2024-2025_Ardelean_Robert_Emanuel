@@ -36,9 +36,9 @@ public class OrderRepositoryMySQL implements OrderRepository {
                 int userId = resultSet.getInt("user_id");
                 String employeeEmail = resultSet.getString("employee_email");
                 double totalSales = resultSet.getDouble("total_sales");
-                long totalStockSold = resultSet.getLong("total_stock_sold");  // Stoc total vândut
-                String firstSaleDate = resultSet.getString("first_sale_date"); // Prima dată de vânzare
-                String lastSaleDate = resultSet.getString("last_sale_date");   // Ultima dată de vânzare
+                long totalStockSold = resultSet.getLong("total_stock_sold");
+                String firstSaleDate = resultSet.getString("first_sale_date");
+                String lastSaleDate = resultSet.getString("last_sale_date");
 
                 report.add("ID: " + userId +
                         ", Email: " + employeeEmail +

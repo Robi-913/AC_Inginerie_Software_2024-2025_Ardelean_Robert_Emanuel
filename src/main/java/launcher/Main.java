@@ -59,17 +59,17 @@ public class Main {
 //        System.out.println(authenticationService.login("Buna","suntuntest"));
 
 
-        OrderRepository orderRepository = new OrderRepositoryMySQL(DatabaseConnectionFactory.getConnectionWrapper(false).getConnection());
-        OrderService orderService = new OrderServiceImpl(orderRepository);
-
-        // Generează raportul PDF
-        String startDate = "2024-01-01";
-        String endDate = "2024-12-31";
-        String outputFilePath = "sales_report.pdf";
-
-        orderService.generateReport(startDate, endDate, outputFilePath);
-
-        System.out.println("Report generated at: " + outputFilePath);
+//        OrderRepository orderRepository = new OrderRepositoryMySQL(DatabaseConnectionFactory.getConnectionWrapper(false).getConnection());
+//        OrderService orderService = new OrderServiceImpl(orderRepository);
+//
+//        // Generează raportul PDF
+//        String startDate = "2024-01-01";
+//        String endDate = "2024-12-31";
+//        String outputFilePath = "sales_report.pdf";
+//
+//        orderService.generateReport(startDate, endDate, outputFilePath);
+//
+//        System.out.println("Report generated at: " + outputFilePath);
 
     }
 }

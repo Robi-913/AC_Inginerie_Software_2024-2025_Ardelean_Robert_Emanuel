@@ -2,8 +2,7 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import mapper.UserMapper;
-import model.User;
+
 import model.validator.Notification;
 import service.order.OrderService;
 import service.user.AuthenticationService;
@@ -11,7 +10,6 @@ import view.AdminView;
 import view.model.UserDTO;
 import view.model.builder.UserDTOBuilder;
 
-import java.util.List;
 
 public class AdminController {
     private final AdminView adminView;
