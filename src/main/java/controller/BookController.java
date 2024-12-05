@@ -153,10 +153,8 @@ public class BookController {
                     long newStock = currentStock - soldStock;
 
                     if (newStock == 0) {
-                        // Dacă stocul ajunge la 0, eliminăm cartea din listă
                         bookView.removeBookFromObservableList(bookDTO);
                     } else {
-                        // Dacă stocul nu este 0, actualizăm lista
                         bookDTO.setStock(Long.toString(newStock));
                         bookView.updateBookInObservableList(bookDTO);
                     }

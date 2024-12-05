@@ -82,6 +82,7 @@ public class SQLTableCreationFactory {
                     "`user_id` INT NOT NULL," +
                     "`time` DATETIME NOT NULL," +
                     "`total_price` DECIMAL(10,2) NOT NULL," +
+                    "`stock` INT NOT NULL," +
                     "PRIMARY KEY (`order_id`)," +
                     "CONSTRAINT `user_order_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)" +
                     "ON DELETE CASCADE ON UPDATE CASCADE" +

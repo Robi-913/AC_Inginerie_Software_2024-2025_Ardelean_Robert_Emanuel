@@ -115,4 +115,21 @@ public class UserRepositoryMySQL implements UserRepository {
         }
         return false;
     }
+
+    @Override
+    public long getLastUsedId() {
+        String query = "SELECT MAX(id) AS last_id FROM " + USER;
+        try (PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+            if (resultSet.next()) {
+                return resultSet.getLong("last_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+
+
 }

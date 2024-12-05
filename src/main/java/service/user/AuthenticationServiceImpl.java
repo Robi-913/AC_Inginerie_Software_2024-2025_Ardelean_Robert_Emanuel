@@ -11,6 +11,7 @@ import repository.user.UserRepository;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Collections;
+import java.util.List;
 
 import static database.Constants.Roles.CUSTOMER;
 
@@ -78,4 +79,49 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             throw new RuntimeException(ex);
         }
     }
+
+    @Override
+    public Notification<Boolean> addUser(String username, String password, String role) {
+        Role userRole = rightsRolesRepository.findRoleByTitle(role);
+
+        if (userRole == null) {
+            Notification<Boolean> notification = new Notification<>();
+            notification.addError("Role does not exist!");
+            notification.setResult(Boolean.FALSE);
+            return notification;
+        }
+
+        User user = new UserBuilder()
+                .setUsername(username)
+                .setPassword(password)
+                .setRoles(Collections.singletonList(userRole))
+                .build();
+
+        UserValidator userValidator = new UserValidator(user);
+
+        boolean userValid = userValidator.validate();
+        Notification<Boolean> userAddNotification = new Notification<>();
+
+        if (!userValid) {
+            userValidator.getErrors().forEach(userAddNotification::addError);
+            userAddNotification.setResult(Boolean.FALSE);
+        } else {
+            user.setPassword(hashPassword(password));
+            userAddNotification.setResult(userRepository.save(user));
+        }
+
+        return userAddNotification;
+    }
+
+    @Override
+    public List<User> listAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public long getLastUsedId() {
+        return userRepository.getLastUsedId();
+    }
+
+
 }

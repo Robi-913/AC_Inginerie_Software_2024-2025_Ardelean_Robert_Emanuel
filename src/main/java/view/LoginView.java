@@ -5,10 +5,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -16,6 +13,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 public class LoginView {
 
@@ -82,6 +81,19 @@ public class LoginView {
         actiontarget = new Text();
         actiontarget.setFill(Color.FIREBRICK);
         gridPane.add(actiontarget, 1, 6);
+    }
+
+    public Optional<ButtonType> addDisplayAlertMessage(String title, String header, String content, ButtonType... buttons) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION); // Setăm tipul pe CONFIRMATION
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+
+        // Adaugăm butoanele personalizate
+        alert.getButtonTypes().setAll(buttons);
+
+        // Afișăm alertul și așteptăm alegerea utilizatorului
+        return alert.showAndWait();
     }
 
     public String getUsername() {

@@ -1,6 +1,8 @@
 package controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.ButtonType;
+import launcher.AdminComponentFactory;
 import launcher.EmployeeComponentFactory;
 import launcher.LoginComponentFactory;
 import model.User;
@@ -8,6 +10,8 @@ import model.validator.Notification;
 import service.user.AuthenticationService;
 import model.session.UserSession;
 import view.LoginView;
+
+import java.util.Optional;
 
 public class LoginController {
 
@@ -40,7 +44,22 @@ public class LoginController {
                 UserSession.getInstance().setUserId(loggedInUser.getId());
                 UserSession.getInstance().setUsername(loggedInUser.getUsername());
 
-                EmployeeComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage());
+                Optional<ButtonType> result = loginView.addDisplayAlertMessage(
+                        "Role Selection",
+                        "Choose your role",
+                        "Do you want to log in as Admin or Employee?",
+                        new ButtonType("Admin"),
+                        new ButtonType("Employee")
+                );
+
+                // Verificăm alegerea utilizatorului
+                if (result.isPresent() && result.get().getText().equals("Admin")) {
+                    // Creează instanța pentru AdminComponentFactory
+                    AdminComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage());
+                } else {
+                    // Creează instanța pentru EmployeeComponentFactory
+                    EmployeeComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage());
+                }
             }
         }
     }

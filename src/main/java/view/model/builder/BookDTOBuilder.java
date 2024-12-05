@@ -2,9 +2,6 @@ package view.model.builder;
 
 import view.model.BookDTO;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 public class BookDTOBuilder {
     private final BookDTO bookDTO;
 

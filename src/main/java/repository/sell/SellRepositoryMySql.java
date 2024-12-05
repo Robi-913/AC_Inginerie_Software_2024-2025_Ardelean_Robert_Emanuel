@@ -38,13 +38,14 @@ public class SellRepositoryMySql implements SellRepository {
     }
 
     @Override
-    public boolean insert(Long employeeId, Double totalPrice) {
-        String insertOrderSql = "INSERT INTO `order` (user_id, total_price, time) VALUES (?, ?, ?)";
-        try (PreparedStatement insertOrderStatement = connection.prepareStatement(insertOrderSql)) {
-            insertOrderStatement.setLong(1, employeeId);
-            insertOrderStatement.setDouble(2, totalPrice);
-            insertOrderStatement.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
-            return insertOrderStatement.executeUpdate() > 0;
+    public boolean insert(Long employeeId, Double totalPrice, Long soldStock) {
+        String insertOrderSql = "INSERT INTO `order` (user_id, total_price, stock, time) VALUES (?, ?, ?, NOW())";
+        try (PreparedStatement statement = connection.prepareStatement(insertOrderSql)) {
+            statement.setLong(1, employeeId);
+            statement.setDouble(2, totalPrice);
+            statement.setLong(3, soldStock);
+
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException("Error while inserting order", e);
         }
@@ -71,7 +72,8 @@ public class SellRepositoryMySql implements SellRepository {
                             }
 
                             double totalPrice = book.getPrice() * soldStock;
-                            return insert(employeeId, totalPrice);
+
+                            return insert(employeeId, totalPrice, soldStock);
                         } else {
                             throw new RuntimeException("Not enough stock to complete the sale.");
                         }
